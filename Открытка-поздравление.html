@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>44 года свадьбы – Топазовый юбилей</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none; /* для лучшего вида, не мешает кликам */
+        }
+
+        body {
+            background: linear-gradient(145deg, #fff4e8 0%, #ffe2ce 100%);
+            font-family: 'Segoe UI', 'Montserrat', system-ui, sans-serif;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .card {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: rgba(255, 250, 240, 0.9);
+            border-radius: 50px;
+            padding: 25px 25px 40px;
+            box-shadow: 0 20px 35px rgba(0,0,0,0.1);
+            backdrop-filter: blur(2px);
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 3rem;
+            background: linear-gradient(135deg, #b45f2b, #df9f6b);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .sub {
+            text-align: center;
+            font-size: 1.4rem;
+            color: #b5651e;
+            margin-bottom: 25px;
+            font-weight: 500;
+        }
+
+        .greeting {
+            background: #fff1e4;
+            padding: 20px;
+            border-radius: 40px;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+            line-height: 1.5;
+            border: 1px solid #ffcfaa;
+        }
+
+        /* галерея */
+        .gallery {
+            margin: 25px 0;
+        }
+
+        .main-slider {
+            position: relative;
+            background: #f3e3d5;
+            border-radius: 32px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            min-height: 350px;
+        }
+
+        .slider-wrapper {
+            display: flex;
+            transition: transform 0.4s ease;
+        }
+
+        .slide {
+            flex: 0 0 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #f8ede2;
+        }
+
+        .slide img {
+            width: 100%;
+            max-height: 450px;
+            object-fit: contain;
+            display: block;
+        }
+
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 235, 215, 0.9);
+            border: none;
+            width: 44px;
+            height: 44px;
+            border-radius: 30px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #a75822;
+            transition: 0.2s;
+            z-index: 10;
+        }
+
+        .slider-btn:hover {
+            background: #ffdbbc;
+        }
+
+        .prev { left: 12px; }
+        .next { right: 12px; }
+
+        .dots {
+            text-align: center;
+            margin: 15px 0 10px;
+        }
+        .dot {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 10px;
+            background: #cbae91;
+            margin: 0 5px;
+            cursor: pointer;
+        }
+        .dot.active {
+            background: #b45f2b;
+            width: 24px;
+        }
+
+        /* загрузчик */
+        .upload-bar {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .btn {
+            background: #d99457;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 40px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn:hover {
+            background: #b55a20;
+            transform: scale(1.02);
+        }
+        .btn-outline {
+            background: #e9cbb2;
+            color: #5e3316;
+        }
+        .btn-outline:hover {
+            background: #dfb892;
+        }
+        .music-panel {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #fff2e6;
+            padding: 8px 20px;
+            border-radius: 50px;
+            box-shadow: 0 5px 12px rgba(0,0,0,0.15);
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            z-index: 200;
+            border: 1px solid #ffca9e;
+        }
+        .music-panel button {
+            background: #c57f48;
+            border: none;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+        .status {
+            font-size: 0.8rem;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #9b6a42;
+        }
+        @media (max-width: 650px) {
+            h1 { font-size: 2.2rem; }
+            .card { padding: 15px; }
+        }
+    </style>
+</head>
+<body>
+<div class="card">
+    <h1>💎 44 года любви 💎</h1>
+    <div class="sub">✨ Топазовый юбилей ✨</div>
+    <div class="greeting">
+        🥂 Дорогие виновники торжества!<br>
+        44 года вы идёте рука об руку — это прекрасный путь, полный тепла, заботы и верности.<br>
+        Пусть каждый день дарит улыбки, здоровье и гармонию. С годовщиной свадьбы!<br>
+        <span style="font-size:1.3rem;">❤️‍🔥 Счастья вам и золотых рассветов! ❤️‍🔥</span>
+    </div>
+
+    <!-- Слайдер -->
+    <div class="gallery">
+        <div class="main-slider">
+            <div class="slider-wrapper" id="sliderWrapper">
+                <!-- Фото будут динамически -->
+            </div>
+            <button class="slider-btn prev" id="prevSlide">❮</button>
+            <button class="slider-btn next" id="nextSlide">❯</button>
+        </div>
+        <div class="dots" id="dots"></div>
+    </div>
+
+    <div class="upload-bar">
+        <label class="btn">
+            📸 Загрузить свои фото
+            <input type="file" id="fileInput" accept="image/*" multiple style="display: none;">
+        </label>
+        <button class="btn btn-outline" id="resetBtn">🔄 Сбросить к начальным фото</button>
+    </div>
+    <p style="text-align: center; font-size: 0.85rem; margin-top: 5px;">
+        ❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️
+    </p>
+
+    <div style="margin-top: 30px; background: #ffe3d0; border-radius: 35px; padding: 20px; text-align: center;">
+        <div style="font-size: 1.7rem;">🌹 Стихи в подарок 🌹</div>
+        <p style="margin-top: 12px; font-style: italic;">
+            Четыре сорок — год за годом,<br>
+            Любовь сияет небосводом.<br>
+            Топаз — как символ теплоты,<br>
+            Хранит мечты и красоты.<br>
+            Пусть счастье длится без конца,<br>
+            Сияют радостью сердца!
+        </p>
+    </div>
+    <footer>44 года — прекрасный возраст любви ❤️</footer>
+</div>
+
+<div class="music-panel">
+    <button id="musicToggleBtn">🔊</button>
+    <span id="musicStatus" class="status">Музыка выключена</span>
+</div>
+
+<audio id="bgAudio" loop preload="auto">
+    <!-- Надёжный трек из бесплатной библиотеки (инструментальная романтическая) -->
+    <source src="https://ru-cdn1.drivemusic.me/dl/online/D1yh036zinEPHIxFn6clbw/1780512392/download_music/2011/12/mendelson-svadebnyjj-marsh.mp3" type="audio/mpeg">
+</audio>
+https://i.ibb.co/bM0Xhsbw/image.jpg
+<script>
+    // ---------- ФОТОГАЛЕРЕЯ (РАБОЧАЯ) ----------
+    let imagesArray = [
+	"https://i.ibb.co/bM0Xhsbw/image.jpg",
+	"https://i.ibb.co/fYXkcHgh/130.jpg",
+        "https://i.ibb.co/mVy5rg42/DSC00128.jpg",
+	"https://i.ibb.co/twkbTT2y/131.jpg",
+	"https://i.ibb.co/fz7JshGz/040.jpg",
+	"https://i.ibb.co/Ldb3PkkX/099.jpg",
+	"https://i.ibb.co/1f5LDVSd/mar.jpg"
+    ];
+
+    let currentSlide = 0;
+    let slideInterval = null;
+    const sliderWrapper = document.getElementById('sliderWrapper');
+    const dotsDiv = document.getElementById('dots');
+    const prevBtn = document.getElementById('prevSlide');
+    const nextBtn = document.getElementById('nextSlide');
+    const resetBtnEl = document.getElementById('resetBtn');
+    const fileInput = document.getElementById('fileInput');
+
+    function buildSlider() {
+        if (!sliderWrapper) return;
+        sliderWrapper.innerHTML = '';
+        imagesArray.forEach((src, idx) => {
+            const slideDiv = document.createElement('div');
+            slideDiv.className = 'slide';
+            const img = document.createElement('img');
+            img.src = src;
+            img.alt = `Свадебное фото ${idx+1}`;
+            slideDiv.appendChild(img);
+            sliderWrapper.appendChild(slideDiv);
+        });
+        updateSliderPosition();
+        generateDots();
+        resetAutoPlay();
+    }
+
+    function updateSliderPosition() {
+        if (sliderWrapper) {
+            sliderWrapper.style.transform = `translateX(-${currentSlide * 100}%)`;
+        }
+    }
+
+    function generateDots() {
+        if (!dotsDiv) return;
+        dotsDiv.innerHTML = '';
+        for (let i = 0; i < imagesArray.length; i++) {
+            const dot = document.createElement('span');
+            dot.className = 'dot';
+            if (i === currentSlide) dot.classList.add('active');
+            dot.addEventListener('click', () => {
+                currentSlide = i;
+                updateSliderPosition();
+                generateDots();
+                resetAutoPlay();
+            });
+            dotsDiv.appendChild(dot);
+        }
+    }
+
+    function nextSlideFn() {
+        if (imagesArray.length === 0) return;
+        currentSlide = (currentSlide + 1) % imagesArray.length;
+        updateSliderPosition();
+        generateDots();
+        resetAutoPlay();
+    }
+
+    function prevSlideFn() {
+        if (imagesArray.length === 0) return;
+        currentSlide = (currentSlide - 1 + imagesArray.length) % imagesArray.length;
+        updateSliderPosition();
+        generateDots();
+        resetAutoPlay();
+    }
+
+    function resetAutoPlay() {
+        if (slideInterval) clearInterval(slideInterval);
+        if (imagesArray.length > 1) {
+            slideInterval = setInterval(() => {
+                nextSlideFn();
+            }, 5500);
+        }
+    }
+
+    // Добавление новых фото (из загрузки)
+    function addImages(newImgUrls) {
+        if (!newImgUrls.length) return;
+        imagesArray.push(...newImgUrls);
+        buildSlider(); // перестроит всё, сбросит currentSlide на 0? нет, но установит первый
+        currentSlide = 0;
+        updateSliderPosition();
+        generateDots();
+        resetAutoPlay();
+        // Небольшой конфетти в знак добавления
+        if (typeof canvasConfetti === 'function') {
+            canvasConfetti({ particleCount: 60, spread: 55, origin: { y: 0.7 } });
+        } else {
+            // если конфетти нет, просто ничего
+        }
+    }
+
+    function resetToDefault() {
+        imagesArray = [
+        "https://ibb.co/yckFm7qZ",
+        "https://ibb.co/BHdg5568",
+        "https://ibb.co/RkFcn3jr",
+        "https://ibb.co/1txckDJt",
+        "https://ibb.co/5htP9MMg",
+	"https://ibb.co/WWHkTfhb",
+	"https://ibb.co/rGSmCPWc"
+        ];
+        currentSlide = 0;
+        buildSlider();
+    }
+
+    // Загрузка файлов пользователя
+    fileInput?.addEventListener('change', (e) => {
+        const files = Array.from(e.target.files);
+        if (files.length === 0) return;
+        const loadedUrls = [];
+        let countLoaded = 0;
+        files.forEach(file => {
+            if (!file.type.startsWith('image/')) return;
+            const reader = new FileReader();
+            reader.onload = (ev) => {
+                loadedUrls.push(ev.target.result);
+                countLoaded++;
+                if (countLoaded === files.length) {
+                    addImages(loadedUrls);
+                    // сбросить input, чтобы можно было загрузить снова те же файлы
+                    fileInput.value = '';
+                }
+            };
+            reader.readAsDataURL(file);
+        });
+    });
+
+    resetBtnEl?.addEventListener('click', resetToDefault);
+    prevBtn?.addEventListener('click', prevSlideFn);
+    nextBtn?.addEventListener('click', nextSlideFn);
+
+    // ---------- МУЗЫКА (ГАРАНТИРОВАННО РАБОТАЕТ ПО КЛИКУ) ----------
+    const audioElem = document.getElementById('bgAudio');
+    const musicBtn = document.getElementById('musicToggleBtn');
+    const musicStatusSpan = document.getElementById('musicStatus');
+    let isMusicPlaying = false;
+
+    // Установим громкость
+    audioElem.volume = 0.35;
+
+    function toggleMusic() {
+        if (isMusicPlaying) {
+            audioElem.pause();
+            musicBtn.innerHTML = '🔇';
+            musicStatusSpan.innerText = 'Музыка выключена';
+            isMusicPlaying = false;
+        } else {
+            // Пытаемся включить
+            const playPromise = audioElem.play();
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    musicBtn.innerHTML = '🎵';
+                    musicStatusSpan.innerText = 'Музыка играет ♪';
+                    isMusicPlaying = true;
+                }).catch(err => {
+                    console.warn("Не удалось воспроизвести: ", err);
+                    musicStatusSpan.innerText = 'Ошибка: нажми ещё раз';
+                    // Предложим повторный клик
+                    setTimeout(() => {
+                        if (!isMusicPlaying) {
+                            audioElem.play().then(() => {
+                                musicBtn.innerHTML = '🎵';
+                                musicStatusSpan.innerText = 'Музыка играет ♪';
+                                isMusicPlaying = true;
+                            }).catch(() => {});
+                        }
+                    }, 100);
+                });
+            }
+        }
+    }
+
+    musicBtn.addEventListener('click', toggleMusic);
+
+    // Дополнительно: если аудио зависло или не загрузилось, покажем подсказку
+    audioElem.addEventListener('error', () => {
+        musicStatusSpan.innerText = '⚠️ Трек недоступен, но можно включить другой';
+        musicBtn.disabled = false;
+    });
+
+    // подгружаем конфетти из библиотеки (лёгкая)
+    const confettiScript = document.createElement('script');
+    confettiScript.src = "https://cdn.jsdelivr.net/npm/canvas-confetti@1";
+    confettiScript.onload = () => {
+        console.log("конфетти готов");
+    };
+    document.head.appendChild(confettiScript);
+
+    // Инициализация слайдера после загрузки DOM
+    buildSlider();
+
+    // Если нужно, чтобы при клике в любом месте страницы музыка включалась (опционально) - но лучше через кнопку
+    // сделаем так: при первом нажатии на любое место, если музыка выключена и пользователь не нажал кнопку, 
+    // можно спросить? нет, просто оставим кнопку.
+    // Но для удобства: добавим подсказку при первом клике на слайдер.
+    document.body.addEventListener('click', function firstClick(e) {
+        if (!isMusicPlaying && !audioElem.currentTime) {
+            // Предложим аккуратно: не включаем насильно, но показываем сообщение
+            musicStatusSpan.innerText = 'Нажмите 🔊 чтобы включить музыку';
+            setTimeout(() => {
+                if (!isMusicPlaying) musicStatusSpan.innerText = 'Музыка выключена';
+            }, 3000);
+            document.body.removeEventListener('click', firstClick);
+        }
+    });
+</script>
+<script>
+    (function() {
+        const audio = document.getElementById('bgAudio');
+        // Пытаемся включить музыку автоматически (может не сработать)
+        audio.play().then(() => {
+            // Если получилось — отлично
+            document.getElementById('musicToggleBtn').innerHTML = '🎵';
+            document.getElementById('musicStatus').innerText = 'Музыка играет ♪';
+        }).catch(() => {
+            // Если не получилось — показываем оверлей с просьбой кликнуть
+            const overlay = document.createElement('div');
+            overlay.style.cssText = 'position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); color:#ffefcf; display:flex; align-items:center; justify-content:center; z-index:10000; font-size:1.8rem; text-align:center; cursor:pointer; font-family:inherit; backdrop-filter:blur(4px);';
+            overlay.innerHTML = '✨ Дорогие мама и папа! ✨<br> Поздравляю с годовщиной Вашей свадьбы!<br><br> (нажмите в любом месте)';
+            document.body.appendChild(overlay);
+            overlay.addEventListener('click', () => {
+                audio.play().then(() => {
+                    document.getElementById('musicToggleBtn').innerHTML = '🎵';
+                    document.getElementById('musicStatus').innerText = 'Музыка играет ♪';
+                    overlay.remove();
+                }).catch(e => console.log(e));
+            });
+        });
+    })();
+</script>
+</body>
+</html>
